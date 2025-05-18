@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "3582ec73-9629-4aca-9c24-aca6c3a5fdd2",
+		"name": "LittleLemonCapstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39794605"
+	},
+	"item": [
+		{
+			"name": "Menu",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/restaurant/menu",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"restaurant",
+						"menu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MenuItem",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Greek Salad",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "6.50",
+							"type": "text"
+						},
+						{
+							"key": "inventory",
+							"value": "12",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/restaurant/menu",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"restaurant",
+						"menu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MenuItem",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Greek Salad",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "11.00",
+							"type": "text"
+						},
+						{
+							"key": "inventory",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/restaurant/menu/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"restaurant",
+						"menu",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
