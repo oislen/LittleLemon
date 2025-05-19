@@ -2,3 +2,4 @@ django
 djangorestframework
 djoser
 mysqlclient
+djangorestframework-xml
