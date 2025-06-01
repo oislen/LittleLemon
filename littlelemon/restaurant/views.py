@@ -1,37 +1,35 @@
+# from django.http import HttpResponse
 from django.shortcuts import render
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
-from .models import Menu, Booking
-from .serializers import MenuItemSerializer, BookingSerializer, UserSerializer
-from django.contrib.auth.models import User
-from rest_framework import permissions
-from rest_framework.decorators import api_view, permission_classes
+from .forms import BookingForm
+from .models import Menu
 
-def index(request):
-    return render(request, "index.html", {})
 
-class MenuItemView(generics.ListCreateAPIView):
-    queryset = Menu.objects.all()
-    serializer_class = MenuItemSerializer
 
-class SingleMenuItemView(generics.RetrieveUpdateAPIView, generics.RetrieveUpdateDestroyAPIView):
-    queryset = Menu.objects.all()
-    serializer_class = MenuItemSerializer
+# Create your views here.
+def home(request):
+    return render(request, 'index.html')
 
-class BookingViewSet(ModelViewSet):
-    queryset = Booking.objects.all()
-    serializer_class = BookingSerializer
+def about(request):
+    return render(request, 'about.html')
 
-class UserViewSet(ModelViewSet):
-   queryset = User.objects.all()
-   serializer_class = UserSerializer
-   permission_classes = [permissions.IsAuthenticated]
+def book(request):
+    form = BookingForm()
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'form':form}
+    return render(request, 'book.html', context)
 
-@api_view()
-@permission_classes([IsAuthenticated])
-# @authentication_classes([TokenAuthentication])
-def msg(request):
-    return Response({"message":"This view is protected"})
+# Add your code here to create new views
+def menu(request):
+    menu_data = Menu.objects.all()
+    main_data = {"menu":menu_data}
+    return render(request, 'menu.html', main_data)
+
+def display_menu_item(request, pk=None): 
+    if pk: 
+        menu_item = Menu.objects.get(pk=pk) 
+    else: 
+        menu_item = "" 
+    return render(request, 'menu_item.html', {"menu_item": menu_item}) 
