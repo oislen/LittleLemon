@@ -1,2 +1,8 @@
 # LittleLemon
-Little Lemon Capstone Project for Meta Backend Developer Course
+Little Lemon Web-App Project for Meta Backend Developer Course.
+
+![Home Page](report/LittleLemon_HomePage.png)
+
+The Web-App also includes a REST API for interacting with backend data model.
+
+![Rest API](report/API_HomePage.png)
