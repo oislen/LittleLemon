@@ -8,6 +8,7 @@ from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer
 
 
 class AssignUserToManagerGroup(APIView):
+    permission_classes = [IsAdminUser]
 
     def post(self, request):
         user_id = request.data.get('user_id')
@@ -17,20 +18,24 @@ class AssignUserToManagerGroup(APIView):
         return Response({"message": "User assigned to Manager group"})
 
 class AssignToDeliveryCrew(APIView):
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        user_id = request.data.get("user_id")
-        order_id = request.data.get("order_id")
-        user = User.objects.get(id=user_id)
-        order = Order.objects.get(id=order_id)
-        order.delivery_crew = user
-        order.save()
-        return Response({"message": "Order assigned to delivery crew"})
+        if request.user.groups.filter(name="Manager").exists():
+            user_id = request.data.get("user_id")
+            order_id = request.data.get("order_id")
+            user = User.objects.get(id=user_id)
+            order = Order.objects.get(id=order_id)
+            order.delivery_crew = user
+            order.save()
+            return Response({"message": "Order assigned to delivery crew"})
+        return Response({"error": "Unauthorized"}, status=403)
 
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAdminUser]
 
 class MenuItemViewSet(ModelViewSet):
     queryset = MenuItem.objects.all()
@@ -39,6 +44,7 @@ class MenuItemViewSet(ModelViewSet):
 
 class CustomerOrderViewSet(ModelViewSet):
     serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
@@ -47,11 +53,14 @@ class CustomerOrderViewSet(ModelViewSet):
         serializer.save(user=self.request.user)
 
 class DeliveryCrewOrderView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        orders = Order.objects.filter(delivery_crew=request.user, status=False)
-        serializer = OrderSerializer(orders, many=True)
-        return Response(serializer.data)
+        if request.user.groups.filter(name="Delivery Crew").exists():
+            orders = Order.objects.filter(delivery_crew=request.user, status=False)
+            serializer = OrderSerializer(orders, many=True)
+            return Response(serializer.data)
+        return Response({"error": "Unauthorized"}, status=403)
 
     def patch(self, request, order_id):
         order = Order.objects.get(id=order_id, delivery_crew=request.user)
