@@ -7,9 +7,10 @@ class Category(models.Model):
 class MenuItem(models.Model):
    name = models.CharField(max_length=255, db_index=True)
    price = models.DecimalField(max_digits=6, decimal_places=2, db_index=True)
-   menu_item_description = models.TextField(max_length=1000, default='')
-   featured = models.BooleanField(db_index=True)
-   category = models.ForeignKey(Category, on_delete=models.PROTECT)
+   quantity = models.SmallIntegerField(default=0)
+   menu_item_description = models.TextField(max_length=1000, default=None)
+   featured = models.BooleanField(db_index=True, default=False)
+   category = models.ForeignKey(Category, on_delete=models.PROTECT, default=None)
 
    def __str__(self):
       return self.name
