@@ -1,5 +1,6 @@
-# LittleLemon
-Little Lemon Web-App Project for Meta Backend Developer Course.
+# Overview
+
+A Web-App for the Little Lemon Restaurant as per the Meta Backend Developer Course.
 
 ![Home Page](report/LittleLemon_HomePage.png)
 
