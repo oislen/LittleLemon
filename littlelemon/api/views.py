@@ -6,32 +6,6 @@ from django.contrib.auth.models import Group, User
 from .models import Category, MenuItem, Order, Cart
 from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer, CartSerializer
 
-
-class AssignUserToManagerGroup(APIView):
-    permission_classes = [IsAdminUser]
-
-    def post(self, request):
-        user_id = request.data.get('user_id')
-        user = User.objects.get(id=user_id)
-        manager_group, _ = Group.objects.get_or_create(name="Manager")
-        manager_group.user_set.add(user)
-        return Response({"message": "User assigned to Manager group"})
-
-class AssignToDeliveryCrew(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        if request.user.groups.filter(name="Manager").exists():
-            user_id = request.data.get("user_id")
-            order_id = request.data.get("order_id")
-            user = User.objects.get(id=user_id)
-            order = Order.objects.get(id=order_id)
-            order.delivery_crew = user
-            order.save()
-            return Response({"message": "Order assigned to delivery crew"})
-        return Response({"error": "Unauthorized"}, status=403)
-
-
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -40,7 +14,6 @@ class CategoryViewSet(ModelViewSet):
 class MenuItemViewSet(ModelViewSet):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
-
 
 class CustomerOrderViewSet(ModelViewSet):
     serializer_class = OrderSerializer
@@ -67,3 +40,27 @@ class DeliveryCrewOrderView(APIView):
         order.status = True  
         order.save()
         return Response({"message": "Order marked as delivered"})
+
+class AssignUserToManagerGroup(APIView):
+    permission_classes = [IsAdminUser]
+
+    def post(self, request):
+        user_id = request.data.get('user_id')
+        user = User.objects.get(id=user_id)
+        manager_group, _ = Group.objects.get_or_create(name="Manager")
+        manager_group.user_set.add(user)
+        return Response({"message": "User assigned to Manager group"})
+
+class AssignToDeliveryCrew(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        if request.user.groups.filter(name="Manager").exists():
+            user_id = request.data.get("user_id")
+            order_id = request.data.get("order_id")
+            user = User.objects.get(id=user_id)
+            order = Order.objects.get(id=order_id)
+            order.delivery_crew = user
+            order.save()
+            return Response({"message": "Order assigned to delivery crew"})
+        return Response({"error": "Unauthorized"}, status=403)
