@@ -1,7 +1,9 @@
 # from django.http import HttpResponse
+import os
 from django.shortcuts import render
 from .forms import BookingForm
 from .models import MenuItem
+from littlelemon.settings import STATIC_URL
 
 def home(request):
     return render(request, 'index.html')
@@ -25,8 +27,15 @@ def menu(request):
     return render(request, 'menu.html', main_data)
 
 def display_menu_item(request, pk=None): 
+    # default menu item response
+    menu_item = ""
+    menu_item_data = {"menu_item": menu_item}
     if pk: 
+        # pull menu item
         menu_item = MenuItem.objects.get(pk=pk)
-    else: 
-        menu_item = "" 
-    return render(request, 'menu_item.html', {"menu_item": menu_item})
+        # generate image file path
+        menu_item.image_filepath = f"/{STATIC_URL}img/menu_items/{menu_item.name}.jpg"
+        # check if image file exists
+        if os.path.exists(os.path.exists(menu_item.image_filepath)):
+            menu_item_data = {"menu_item": menu_item}
+    return render(request, 'menu_item.html', menu_item_data)
