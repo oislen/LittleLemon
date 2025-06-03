@@ -1,6 +1,7 @@
 import pandas as pd
 from django.contrib.auth.models import User
 from restaurant.models import Category, MenuItem, Booking
+from datetime import datetime, timezone
 
 def run():
     # read csv file and iterate through the data and create model instances
@@ -31,5 +32,6 @@ def run():
             first_name=row["first_name"],
             last_name=row["last_name"],
             guest_number=row["guest_number"],
+            date_time=datetime.strptime(row["date_time"], '%d/%m/%Y %H:%M').replace(tzinfo=timezone.utc).astimezone(tz=None),
             comment=row["comment"]
         )
