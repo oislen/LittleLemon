@@ -19,7 +19,8 @@ class MenuItem(models.Model):
 class Booking(models.Model):
    first_name = models.CharField(max_length=200)    
    last_name = models.CharField(max_length=200)
-   guest_number = models.IntegerField()
+   guest_number = models.PositiveIntegerField()
+   date_time = models.DateTimeField()
    comment = models.CharField(max_length=1000)
 
    def __str__(self):
