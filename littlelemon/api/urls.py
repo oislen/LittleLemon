@@ -1,11 +1,12 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, MenuItemViewSet, CustomerOrderViewSet,AssignUserToManagerGroup, AssignToDeliveryCrew, DeliveryCrewOrderView
+from .views import CategoryViewSet, MenuItemViewSet, BookingViewSet, CustomerOrderViewSet,AssignUserToManagerGroup, AssignToDeliveryCrew, DeliveryCrewOrderView
 
 router = DefaultRouter()
 router.register('categories', CategoryViewSet, basename='categories')
 router.register('menu-items', MenuItemViewSet, basename='menu-items')
 router.register('orders', CustomerOrderViewSet, basename='orders')
+router.register('bookings', BookingViewSet, basename='bookings')
 
 urlpatterns = [
     path('', include(router.urls)),
