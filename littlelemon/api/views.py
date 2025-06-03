@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import Group, User
-from .models import Category, MenuItem, Order, Cart
+from restaurant.models import Category, MenuItem, Order, Cart
 from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer, CartSerializer
 
 class CategoryViewSet(ModelViewSet):
