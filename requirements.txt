@@ -3,3 +3,5 @@ djangorestframework
 djoser
 mysqlclient
 djangorestframework-xml
+django-extensions
+pandas
