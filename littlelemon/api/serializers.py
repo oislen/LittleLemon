@@ -1,24 +1,27 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Cart, Order, OrderItem
-from restaurant.models import MenuItem, Category, Booking
-
-class CategorySerializer (serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'title', 'slug']
+from restaurant.models import MenuItem, Category, Booking, Cart, Order, OrderItem
 
 class MenuItemSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
     class Meta:
         model = MenuItem
-        fields = ['id', 'name', 'quantity', 'price', 'category', 'featured']
+        fields = fields = "__all__"
 
 class BookingSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Booking
-        fields = ['name', 'no_of_guests', 'booking_date']
+        fields = "__all__"
+
+class CategorySerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'groups']
 
 class CartSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=serializers.CurrentUserDefault())
@@ -29,7 +32,6 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ['user', 'menuitem', 'unit_price', 'quantity', 'price']
         extra_kwargs = {'price': {'read_only': True}}
-
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
