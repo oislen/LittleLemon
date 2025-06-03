@@ -16,4 +16,6 @@ cd littlelemon
 python manage.py makemigrations restaurant
 python manage.py migrate
 python manage.py runscript restaurant.import_data
+# run web-app
+python manage.py runserver
 ```
