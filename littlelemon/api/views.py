@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import Group, User
-from restaurant.models import Category, MenuItem, Order, Cart
-from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer, CartSerializer
+from restaurant.models import Category, MenuItem, Order, Cart, Booking
+from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer, CartSerializer, BookingSerializer
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
@@ -14,6 +14,10 @@ class CategoryViewSet(ModelViewSet):
 class MenuItemViewSet(ModelViewSet):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
+
+class BookingViewSet(ModelViewSet):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
 
 class CustomerOrderViewSet(ModelViewSet):
     serializer_class = OrderSerializer
