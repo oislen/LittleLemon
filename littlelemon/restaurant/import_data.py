@@ -3,6 +3,7 @@ import pandas as pd
 from django.contrib.auth.models import User
 from restaurant.models import Category, MenuItem, Booking
 from datetime import datetime, timezone
+from littlelemon.settings import DATETIME_FORMAT
 
 def run():
     # set up logging
@@ -39,6 +40,6 @@ def run():
             first_name=row["first_name"],
             last_name=row["last_name"],
             guest_number=row["guest_number"],
-            date_time=datetime.strptime(row["date_time"], '%d/%m/%Y %H:%M').replace(tzinfo=timezone.utc).astimezone(tz=None),
+            date_time=row["date_time"],
             comment=row["comment"]
         )
