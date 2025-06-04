@@ -1,9 +1,15 @@
+import logging
 import pandas as pd
 from django.contrib.auth.models import User
 from restaurant.models import Category, MenuItem, Booking
 from datetime import datetime, timezone
 
 def run():
+    # set up logging
+    lgr = logging.getLogger()
+    lgr.setLevel(logging.INFO)
+    
+    logging.info("Loading Menu Items ...")
     # read csv file and iterate through the data and create model instances
     menu_item_fpath = "restaurant/static/data/menu_items.csv"
     menu_item_data = pd.read_csv(menu_item_fpath, encoding="utf-8")
@@ -22,7 +28,8 @@ def run():
             featured=row["featured"],
             category=category
         )
-
+    
+    logging.info("Loading Bookings ...")
     # read csv file and iterate through the data and create model instances
     booking_fpath = "restaurant/static/data/bookings.csv"
     booking_data = pd.read_csv(booking_fpath, encoding="utf-8")
