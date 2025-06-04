@@ -3,9 +3,9 @@ from restaurant.models import Booking, MenuItem, Category
 from random import randint
 
 BOOKINGS = {
-    1: {"first_name": "Adam", "last_name": "Byrne", "guest_number": randint(1, 11)},
-    2: {"first_name": "Jake", "last_name": "Nelson", "guest_number": randint(1, 11)},
-    3: {"first_name": "Sinead", "last_name": "Bughes", "guest_number": randint(1, 11)},
+    1: {"first_name": "Adam", "last_name": "Byrne", "guest_number": randint(1, 11), "date_time":"2023-03-04 09:00", "comment":"Wedding"},
+    2: {"first_name": "Jake", "last_name": "Nelson", "guest_number": randint(1, 11), "date_time":"2024-01-10 12:00", "comment":"Funeral"},
+    3: {"first_name": "Sinead", "last_name": "Bughes", "guest_number": randint(1, 11), "date_time":"2025-12-20 14:00", "comment":"Christening"},
 }
 
 MENU_ITEMS = {
@@ -13,27 +13,6 @@ MENU_ITEMS = {
     2: {"name": "Vanilla Latte", "price": 3.99, "quantity": randint(0, 11), "description":"Barista latte with vanilla essence" , "category":"Drinks"},
     3: {"name": "Ice-cream", "price": 5.00, "quantity": randint(0, 11), "description":"Chocolate, strawberry ot vanilla", "category":"Dessert"},
 }
-
-class UserMixin:
-
-    def create_user(self, username, password):
-        url = "http://127.0.0.1:8000/auth/users/"
-        data = {
-            "username": username,
-            "password": password,
-        }
-        return Client().post(url, data=data)
-
-    def get_token(self, username, password):
-        url = "http://127.0.0.1:8000/api/token/login/"
-        data = {
-            "username": username,
-            "password": password,
-        }
-        return Client().post(url, data=data).data.get("access")
-
-    def get_auth_header(self, token):
-        return {"Authorization": f"JWT {token}"}
 
 class BookingMixin:
     bookings = BOOKINGS
@@ -45,6 +24,7 @@ class BookingMixin:
                 last_name = self.bookings[idx]["last_name"],
                 guest_number = self.bookings[idx]["guest_number"],
                 date_time = self.bookings[idx]["date_time"],
+                comment = self.bookings[idx].get("comment", None),
             )
             booking.save()
 
@@ -56,7 +36,8 @@ class SingleBookingMixin:
             first_name = self.booking.get("first_name"),
             last_name = self.booking.get("last_name"),
             guest_number = self.booking.get("guest_number"),
-            date_time = self.booking.get("date_time")
+            date_time = self.booking.get("date_time"),
+            comment = self.booking.get("comment", None),
         )
         booking.save()
         self.booking = booking
