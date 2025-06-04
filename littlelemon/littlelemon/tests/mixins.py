@@ -6,14 +6,12 @@ BOOKINGS = {
     1: {"first_name": "Adam", "last_name": "Byrne", "guest_number": randint(1, 11)},
     2: {"first_name": "Jake", "last_name": "Nelson", "guest_number": randint(1, 11)},
     3: {"first_name": "Sinead", "last_name": "Bughes", "guest_number": randint(1, 11)},
-    4: {"first_name": "Ashley", "last_name": "Matthews", "noguest_number_og_guests": randint(1, 11)},
 }
 
 MENU_ITEMS = {
     1: {"name": "Apple Pie", "price": 13.78, "quantity": randint(0, 11), "description":"Baked apple pie with cream", "category":"Dessert"},
     2: {"name": "Vanilla Latte", "price": 3.99, "quantity": randint(0, 11), "description":"Barista latte with vanilla essence" , "category":"Drinks"},
     3: {"name": "Ice-cream", "price": 5.00, "quantity": randint(0, 11), "description":"Chocolate, strawberry ot vanilla", "category":"Dessert"},
-    4: {"name": "Irish Coffee", "price": 7.89, "quantity": randint(0, 11), "description":"Choice of bourbon.", "category":"Drinks"},
 }
 
 class UserMixin:
