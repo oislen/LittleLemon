@@ -4,6 +4,8 @@ FROM ubuntu:latest
 # set environment variables
 ENV user=ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 # set python version
 ARG PYTHON_VERSION="3.12"
 ENV PYTHON_VERSION=${PYTHON_VERSION}
@@ -28,4 +30,5 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN /opt/venv/bin/python3 -m pip install -v -r /home/ubuntu/LittleLemon/requirements.txt
 
 WORKDIR /home/${user}/LittleLemon/littlelemon
-ENTRYPOINT  ["/opt/venv/bin/python3", "manage.py", "runserver"]
+EXPOSE 8000
+CMD  ["/opt/venv/bin/python3", "manage.py", "runserver", "0.0.0.0:8000"]
