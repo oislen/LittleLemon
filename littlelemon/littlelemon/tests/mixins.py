@@ -3,9 +3,9 @@ from restaurant.models import Booking, MenuItem, Category
 from random import randint
 
 BOOKINGS = {
-    1: {"first_name": "Adam", "last_name": "Byrne", "guest_number": randint(1, 11), "date_time":"2023-03-04 09:00", "comment":"Wedding"},
-    2: {"first_name": "Jake", "last_name": "Nelson", "guest_number": randint(1, 11), "date_time":"2024-01-10 12:00", "comment":"Funeral"},
-    3: {"first_name": "Sinead", "last_name": "Bughes", "guest_number": randint(1, 11), "date_time":"2025-12-20 14:00", "comment":"Christening"},
+    1: {"first_name": "Adam", "last_name": "Byrne", "guest_number": randint(1, 11), "date_time":"2023-03-04 09:00:00", "comment":"Wedding"},
+    2: {"first_name": "Jake", "last_name": "Nelson", "guest_number": randint(1, 11), "date_time":"2024-01-10 12:00:00", "comment":"Funeral"},
+    3: {"first_name": "Sinead", "last_name": "Bughes", "guest_number": randint(1, 11), "date_time":"2025-12-20 14:00:00", "comment":"Christening"},
 }
 
 MENU_ITEMS = {
