@@ -1,26 +1,23 @@
 from django.test import Client, TestCase
+from django.contrib.auth.models import User
 from django.urls import reverse
 import json
 
 from api.serializers import MenuItemSerializer, BookingSerializer
 from restaurant.models import MenuItem, Booking
-from littlelemon.tests.mixins import UserMixin, BookingMixin, SingleBookingMixin, MenuItemMixin, SingleMenuItemMixin
+from littlelemon.tests.mixins import BookingMixin, SingleBookingMixin, MenuItemMixin, SingleMenuItemMixin
 
 class SetUpMixin:
 
     def setUp(self):
-        self.user = self.create_user(
-            username = "test@email.com",
-            password = "testpasswd",
-        )
-        self.token = self.get_token(
-            username = "test@email.com",
-            password = "testpasswd",
-        )
-        self.client = Client(HTTP_AUTHORIZATION=f"JWT {self.token}")
+        username = 'test@email.com'
+        password = "testpasswd"
+        # create test user
+        self.user = User.objects.create_user(username=username, password=password)
+        # log in to django client as test user
+        self.login = self.client.login(username=username, password=password)
 
-
-class BookingViewTest(SetUpMixin, UserMixin, BookingMixin, TestCase):
+class BookingViewTest(SetUpMixin, BookingMixin, TestCase):
 
     def setUp(self):
         self.create_bookings()
@@ -40,7 +37,7 @@ class BookingViewTest(SetUpMixin, UserMixin, BookingMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
 
-class SingleBookingViewTest(SetUpMixin, UserMixin, SingleBookingMixin, TestCase):
+class SingleBookingViewTest(SetUpMixin, SingleBookingMixin, TestCase):
 
     def setUp(self):
         self.create_booking()
@@ -81,7 +78,7 @@ class SingleBookingViewTest(SetUpMixin, UserMixin, SingleBookingMixin, TestCase)
         self.assertEqual(Booking.objects.filter(pk=self.booking.pk).exists(), False)
 
 
-class MenuItemViewTest(SetUpMixin, UserMixin, MenuItemMixin, TestCase):
+class MenuItemViewTest(SetUpMixin, MenuItemMixin, TestCase):
 
     def setUp(self):
         self.create_menu_items()
@@ -101,7 +98,7 @@ class MenuItemViewTest(SetUpMixin, UserMixin, MenuItemMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
 
-class SingleMenuItemViewTest(SetUpMixin, UserMixin, SingleMenuItemMixin, TestCase):
+class SingleMenuItemViewTest(SetUpMixin, SingleMenuItemMixin, TestCase):
 
     def setUp(self):
         self.create_menu_item()
