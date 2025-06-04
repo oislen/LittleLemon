@@ -5,6 +5,7 @@ import json
 
 from api.serializers import MenuItemSerializer, BookingSerializer
 from restaurant.models import MenuItem, Booking
+from littlelemon.settings import DATETIME_FORMAT
 from littlelemon.tests.mixins import BookingMixin, SingleBookingMixin, MenuItemMixin, SingleMenuItemMixin
 
 class SetUpMixin:
@@ -30,7 +31,7 @@ class BookingViewTest(SetUpMixin, BookingMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_create(self):
-        data = {"first_name":"jack", "last_name":"Doe", "guest_number":4, "date_time": "2023-03-04 09:00", "comment":"18th Birthday"}
+        data = {"first_name":"jack", "last_name":"Doe", "guest_number":4, "date_time": "2023-03-04 09:00:00", "comment":"18th Birthday"}
         response = self.client.post("/api/bookings/", data=data)
         serializer = BookingSerializer(Booking.objects.get(first_name="jack"))
         self.assertEqual(response.status_code, 201)
@@ -57,7 +58,7 @@ class SingleBookingViewTest(SetUpMixin, SingleBookingMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_update(self):
-        data = json.dumps({"first_name": "will", "last_name": "Gleeson", "guest_number": 6, "booking_date": "2023-03-06 18:00"})
+        data = json.dumps({"first_name": "will", "last_name": "Gleeson", "guest_number": 6, "date_time": "2023-03-06 18:00:00"})
         response = self.client.put(f"/api/bookings/{self.booking.pk}/", data=data, content_type="application/json")
         serializer = BookingSerializer(Booking.objects.get(pk=self.booking.pk))
         self.assertEqual(response.status_code, 200)
@@ -83,9 +84,9 @@ class MenuItemViewTest(SetUpMixin, MenuItemMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_create(self):
-        data = {"name":"Latte", "price":2.99, "quantity":5, "description":"Finely grounded.", "featured":False, "category":"Drinks"}
+        data = {"name":"Latte", "price":2.99, "quantity":5, "description":"Finely grounded.", "featured":False, "category":1}
         response = self.client.post(f"/api/menu-items/", data=data, content_type="application/json")
-        serializer = MenuItemSerializer(MenuItem.objects.get(name="latte"))
+        serializer = MenuItemSerializer(MenuItem.objects.get(name="Latte"))
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data, serializer.data)
 
@@ -110,7 +111,7 @@ class SingleMenuItemViewTest(SetUpMixin, SingleMenuItemMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_update(self):
-        data = json.dumps({"name": "Apple Juice", "price": 3.85, "quantity": 7, "description": "Freshly squeezed", "category":"Drink"})
+        data = json.dumps({"name": "Apple Juice", "price": 3.85, "quantity": 7, "description": "Freshly squeezed", "category":1})
         response = self.client.put(f"/api/menu-items/{self.menu_item.pk}/", data = data, content_type = "application/json")
         serializer = MenuItemSerializer(MenuItem.objects.get(pk=self.menu_item.pk))
         self.assertEqual(response.status_code, 200)
