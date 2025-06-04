@@ -8,10 +8,10 @@ class Category(models.Model):
 class MenuItem(models.Model):
    name = models.CharField(max_length=255, db_index=True)
    price = models.DecimalField(max_digits=6, decimal_places=2, db_index=True)
-   quantity = models.SmallIntegerField(default=0)
-   description = models.TextField(max_length=1000, default=None)
+   quantity = models.SmallIntegerField(default=None, null=True)
+   description = models.TextField(max_length=1000, default=None, null=True)
    featured = models.BooleanField(db_index=True, default=False)
-   category = models.ForeignKey(Category, on_delete=models.PROTECT, default=None)
+   category = models.ForeignKey(Category, on_delete=models.PROTECT, default=None, null=True)
 
    def __str__(self):
       return self.name
@@ -21,7 +21,7 @@ class Booking(models.Model):
    last_name = models.CharField(max_length=200)
    guest_number = models.PositiveIntegerField()
    date_time = models.DateTimeField()
-   comment = models.CharField(max_length=1000, default=None)
+   comment = models.CharField(max_length=1000, default=None, null=True)
 
    def __str__(self):
       return self.first_name + ' ' + self.last_name
