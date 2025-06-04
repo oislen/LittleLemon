@@ -1,7 +1,8 @@
 django
-djangorestframework
-djoser
-mysqlclient
-djangorestframework-xml
 django-extensions
+mysqlclient
+djangorestframework
+djangorestframework-xml
+djangorestframework-simplejwt
+djoser
 pandas
