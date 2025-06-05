@@ -1,16 +1,65 @@
-# Overview
+# Little Lemon Restaurant Web Application
 
-A Web-App for the Little Lemon Restaurant as per the Meta Backend Developer Course.
+## Overview
+
+A web app for the Little Lemon Restaurant as per the Meta Backend Developer Course.
 
 ![Home Page](report/LittleLemon_HomePage.png)
 
-The Web-App also includes a REST API for interacting with backend data model.
+The web app also includes a REST API for interacting with backend data model.
 
 ![Rest API](report/API_HomePage.png)
 
-# Set-Up
+## Running the Application (Windows)
+
+### Anaconda
+
+Create a local conda environment for the Little Lemon Web app using [anaconda](https://www.anaconda.com/):
 
 ```
-cd littlelemon
-exeRefreshDB.cmd
+conda create --name littlelemon python=3.12 --yes
+conda activate littlelemon
+pip install -r requirements.txt
 ```
+
+Initialise the Little Lemon Web app sqlite database with preconfigured data and a super user.
+
+```
+python manage.py makemigrations restaurant
+python manage.py migrate
+python manage.py runscript restaurant.import_data
+python manage.py shell -v 3 -c "from django.contrib.auth.models import User; User.objects.create_superuser('superuser1', 'superuser1@littlelemon.com', 'superuser1')"
+```
+
+Run the django tests and start the Little Lemon Web app using the following commands and the local conda environment:
+
+```
+python manage.py test
+python manage.py runserver
+```
+
+Once the web app is running, navigate to localhost:8000 in your preferred browser
+
+* http://localhost:8000
+
+### Docker
+
+The latest version of the Little Lemon Web App can be found as a [docker](https://www.docker.com/) image on dockerhub here:
+
+* https://hub.docker.com/repository/docker/oislen/littlelemon/general
+
+The image can be pulled from dockerhub using the following command:
+
+```
+docker pull oislen/littlelemon:latest
+```
+
+The Little Lemon Web App can then be started using the following command and the docker image:
+
+```
+docker run --name llr --memory 6GB --shm-size=512m -p 8000:8000 --rm oislen/littlelemon:latest
+```
+
+Once the dashboard app is running, navigate to localhost:5006 in your preferred browser
+
+* http://localhost:8000
