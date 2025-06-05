@@ -29,6 +29,16 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 RUN /opt/venv/bin/python3 -m pip install -v -r /home/ubuntu/LittleLemon/requirements.txt
 
+# set working directory for django app
 WORKDIR /home/${user}/LittleLemon/littlelemon
+# make migrations and migrate data from csv files
+RUN /opt/venv/bin/python3 manage.py makemigrations restaurant
+RUN /opt/venv/bin/python3 manage.py migrate
+RUN /opt/venv/bin/python3 manage.py runscript restaurant.import_data
+# create admin super user
+RUN /opt/venv/bin/python3 manage.py shell -v 3 -c "from django.contrib.auth.models import User; User.objects.create_superuser('superuser1', 'superuser1@littlelemon.com', 'superuser1')"
+# run django app tests
+RUN /opt/venv/bin/python3 manage.py test
+
 EXPOSE 8000
 CMD  ["/opt/venv/bin/python3", "manage.py", "runserver", "0.0.0.0:8000"]
