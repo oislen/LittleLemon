@@ -1,3 +1,3 @@
-﻿name,mobile_num,guest_number,date_time,comment
+﻿full_name,mobile_number,guest_number,date_time,comment
 "John Doe","087192753",4,"2025-01-05 20:00","Birthday"
 "Jane Doe","084649399",8,"2025-07-05 18:00","Work Event"
