@@ -6,9 +6,20 @@ from datetime import datetime, timezone
 from littlelemon.settings import DATETIME_FORMAT
 
 def run():
+    
     # set up logging
     lgr = logging.getLogger()
     lgr.setLevel(logging.INFO)
+    
+    logging.info("Loading Categories ...")
+    # read csv file and iterate through the data and create model instances
+    menu_item_fpath = "restaurant/static/data/categories.csv"
+    menu_item_data = pd.read_csv(menu_item_fpath, encoding="utf-8")
+    for index, row in menu_item_data.iterrows():
+        # create the instance
+        category, created = Category.objects.update_or_create(
+            title=row["title"]
+        )
     
     logging.info("Loading Menu Items ...")
     # read csv file and iterate through the data and create model instances
@@ -16,10 +27,7 @@ def run():
     menu_item_data = pd.read_csv(menu_item_fpath, encoding="utf-8")
     for index, row in menu_item_data.iterrows():
         # create or get the category instance
-        category, created = Category.objects.get_or_create(
-            title=row["category"],
-            defaults={"slug": row["category"].lower().replace(" ", "-")}
-        )
+        category = Category.objects.get(pk=row["category"])
         # create the instance
         menuitem, created = MenuItem.objects.update_or_create(
             name=row["name"],
@@ -27,7 +35,9 @@ def run():
             quantity=row["quantity"],
             description=row["description"],
             featured=row["featured"],
-            category=category
+            category=category,
+            date_added=row["date_added"],
+            reference=row["reference"]
         )
     
     logging.info("Loading Bookings ...")
@@ -37,8 +47,8 @@ def run():
     for index, row in booking_data.iterrows():
         # create the instance
         booking = Booking.objects.update_or_create(
-            first_name=row["first_name"],
-            last_name=row["last_name"],
+            full_name=row["full_name"],
+            mobile_number=row["mobile_number"],
             guest_number=row["guest_number"],
             date_time=row["date_time"],
             comment=row["comment"]
