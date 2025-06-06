@@ -3,15 +3,15 @@ from restaurant.models import Booking, MenuItem, Category
 from random import randint
 
 BOOKINGS = {
-    1: {"first_name": "Adam", "last_name": "Byrne", "guest_number": randint(1, 11), "date_time":"2023-03-04 09:00:00", "comment":"Wedding"},
-    2: {"first_name": "Jake", "last_name": "Nelson", "guest_number": randint(1, 11), "date_time":"2024-01-10 12:00:00", "comment":"Funeral"},
-    3: {"first_name": "Sinead", "last_name": "Bughes", "guest_number": randint(1, 11), "date_time":"2025-12-20 14:00:00", "comment":"Christening"},
+    1: {"full_name": "Adam Byrne", "mobile_number": "1234567", "guest_number": randint(1, 11), "date_time":"2023-03-04 09:00:00", "comment":"Wedding"},
+    2: {"full_name": "Jake Nelson", "mobile_number": "2345678", "guest_number": randint(1, 11), "date_time":"2024-01-10 12:00:00", "comment":"Funeral"},
+    3: {"full_name": "Sinead Bughes", "mobile_number": "3456789", "guest_number": randint(1, 11), "date_time":"2025-12-20 14:00:00", "comment":"Christening"},
 }
 
 MENU_ITEMS = {
-    1: {"name": "Apple Pie", "price": 13.78, "quantity": randint(0, 11), "description":"Baked apple pie with cream", "category":"Dessert"},
-    2: {"name": "Vanilla Latte", "price": 3.99, "quantity": randint(0, 11), "description":"Barista latte with vanilla essence" , "category":"Drinks"},
-    3: {"name": "Ice-cream", "price": 5.00, "quantity": randint(0, 11), "description":"Chocolate, strawberry ot vanilla", "category":"Dessert"},
+    1: {"name": "Apple Pie", "price": 13.78, "quantity": randint(0, 11), "description":"Baked apple pie with cream", "category":"Dessert", "date_added":"2023-03-04", "reference":"APLPIE20230304"},
+    2: {"name": "Vanilla Latte", "price": 3.99, "quantity": randint(0, 11), "description":"Barista latte with vanilla essence" , "category":"Drinks", "date_added":"2023-03-04", "reference":"VANLTE20230304"},
+    3: {"name": "Ice-cream", "price": 5.00, "quantity": randint(0, 11), "description":"Chocolate, strawberry ot vanilla", "category":"Dessert", "date_added":"2023-03-04", "reference":"ICECRM20230304"},
 }
 
 class BookingMixin:
@@ -20,8 +20,8 @@ class BookingMixin:
     def create_bookings(self):
         for idx in self.bookings.keys():
             booking = Booking.objects.create(
-                first_name = self.bookings[idx]["first_name"],
-                last_name = self.bookings[idx]["last_name"],
+                full_name = self.bookings[idx]["full_name"],
+                mobile_number = self.bookings[idx]["mobile_number"],
                 guest_number = self.bookings[idx]["guest_number"],
                 date_time = self.bookings[idx]["date_time"],
                 comment = self.bookings[idx].get("comment", None),
@@ -33,8 +33,8 @@ class SingleBookingMixin:
 
     def create_booking(self):
         booking = Booking.objects.create(
-            first_name = self.booking.get("first_name"),
-            last_name = self.booking.get("last_name"),
+            full_name = self.booking.get("full_name"),
+            mobile_number = self.booking.get("mobile_number"),
             guest_number = self.booking.get("guest_number"),
             date_time = self.booking.get("date_time"),
             comment = self.booking.get("comment", None),
@@ -48,10 +48,7 @@ class MenuItemMixin:
     def create_menu_items(self):
         for idx in self.items.keys():
             # create category
-            category = Category.objects.create(
-                title=self.items[idx].get("category"),
-                slug = self.items[idx].get("category").lower().replace(" ", "-")
-                )
+            category = Category.objects.create(title=self.items[idx].get("category"))
             # create menu item
             item = MenuItem.objects.create(
                 name = self.items[idx]["name"],
@@ -59,7 +56,9 @@ class MenuItemMixin:
                 quantity = self.items[idx].get("quantity", None),
                 description = self.items[idx].get("description", None),
                 featured = self.items[idx].get("featured", False),
-                category = category
+                category = category,
+                date_added = self.items[idx].get("date_added", None),
+                reference = self.items[idx].get("reference", None)
             )
             item.save()
 
@@ -69,10 +68,7 @@ class SingleMenuItemMixin:
 
     def create_menu_item(self):
         # create category
-        category = Category.objects.create(
-            title=self.item.get("category"),
-            slug = self.item.get("category").lower().replace(" ", "-")
-            )
+        category = Category.objects.create(title=self.item.get("category"))
         # create menu item
         item = MenuItem.objects.create(
             name = self.item["name"],
@@ -80,7 +76,9 @@ class SingleMenuItemMixin:
             description = self.item.get("description", None),
             quantity = self.item.get("quantity", None),
             featured = self.item.get("featured", False),
-            category = category
+            category = category,
+            date_added = self.item.get("date_added", None),
+            reference = self.item.get("reference", None),
         )
         item.save()
         self.menu_item = item
