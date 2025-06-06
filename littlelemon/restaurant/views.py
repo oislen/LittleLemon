@@ -22,7 +22,7 @@ def book(request):
 
 # Add your code here to create new views
 def menu(request):
-    menu_data = MenuItem.objects.all()
+    menu_data = MenuItem.objects.filter(featured=True)
     main_data = {"menu":menu_data}
     return render(request, 'menu.html', main_data)
 
@@ -36,6 +36,6 @@ def display_menu_item(request, pk=None):
         # generate image file path
         menu_item.image_filepath = f"/{STATIC_URL}img/menu_items/{menu_item.name}.jpg"
         # check if image file exists
-        if os.path.exists(os.path.exists(menu_item.image_filepath)):
+        if (os.path.exists(os.path.abspath(f".{menu_item.image_filepath}"))):
             menu_item_data = {"menu_item": menu_item}
     return render(request, 'menu_item.html', menu_item_data)
