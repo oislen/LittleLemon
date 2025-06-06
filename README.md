@@ -2,11 +2,11 @@
 
 ## Overview
 
-A web app for the Little Lemon Restaurant as per the Meta Backend Developer Course.
+A web app for the Little Lemon restaurant as per the Meta Backend Developer Course. The user facing web app contains an about page introducing the Little Lemon restaurant, a series of menu item pages describing the dishes available to order, and a booking page for reserving a table at the restaurant.
 
 ![Home Page](report/LittleLemon_HomePage.png)
 
-The web app also includes a REST API for interacting with backend data model.
+The web app also includes a REST API for interacting with backend data model. These include the user facing menu items and booking pages described above. The backend api also includes administrative endpoints for controlling users, orders and deliveries.
 
 ![Rest API](report/API_HomePage.png)
 
@@ -60,6 +60,6 @@ The Little Lemon Web App can then be started using the following command and the
 docker run --name llr --memory 6GB --shm-size=512m -p 8000:8000 --rm oislen/littlelemon:latest
 ```
 
-Once the dashboard app is running, navigate to localhost:5006 in your preferred browser
+Once the web app is running, navigate to localhost:8000 in your preferred browser
 
 * http://localhost:8000
