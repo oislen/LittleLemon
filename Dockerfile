@@ -35,8 +35,6 @@ WORKDIR /home/${user}/LittleLemon/littlelemon
 RUN /opt/venv/bin/python3 manage.py makemigrations restaurant
 RUN /opt/venv/bin/python3 manage.py migrate
 RUN /opt/venv/bin/python3 manage.py runscript restaurant.import_data
-# create admin super user
-RUN /opt/venv/bin/python3 manage.py shell -v 3 -c "from django.contrib.auth.models import User; User.objects.create_superuser('superuser1', 'superuser1@littlelemon.com', 'superuser1')"
 # run django app tests
 RUN /opt/venv/bin/python3 manage.py test
 
