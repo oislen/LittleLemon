@@ -21,7 +21,7 @@ class CategorySerializer (serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = "__all__"
 
 class CartSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=serializers.CurrentUserDefault())
@@ -30,21 +30,21 @@ class CartSerializer(serializers.ModelSerializer):
         return attrs
     class Meta:
         model = Cart
-        fields = ['user', 'menuitem', 'unit_price', 'quantity', 'price']
+        fields = "__all__"
         extra_kwargs = {'price': {'read_only': True}}
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = ['order', 'menuitem', 'quantity', 'price']
+        fields = "__all__"
 
 class OrderSerializer(serializers.ModelSerializer):
     orderitem = OrderItemSerializer(many=True, read_only=True, source='order')
     class Meta:
         model = Order
-        fields = ['id', 'user', 'delivery_crew', 'status', 'date', 'total', 'orderitem']
+        fields = "__all__"
 
 class UserSerilializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','username','email']
+        fields = "__all__"
