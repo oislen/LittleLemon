@@ -9,7 +9,6 @@ from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAdminUser]
 
 class MenuItemViewSet(ModelViewSet):
     queryset = MenuItem.objects.all()
@@ -20,18 +19,8 @@ class BookingViewSet(ModelViewSet):
     serializer_class = BookingSerializer
 
 class CustomerOrderViewSet(ModelViewSet):
+    queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        if User.objects.get(username=self.request.user).is_superuser:
-            response = Order.objects.all()
-        else:
-            response = Order.objects.filter(user=self.request.user)
-        return response
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
 class DeliveryCrewOrderView(APIView):
     permission_classes = [IsAuthenticated]
