@@ -36,7 +36,7 @@ class Order(models.Model):
     delivery_crew = models.ForeignKey(User, on_delete=models.PROTECT, related_name="delivery_crew", null=True)
     status = models.CharField(max_length=32, default="pending")
     total = models.DecimalField(max_digits=6, decimal_places=2)
-    date_time = models.DateField()
+    date_time = models.DateTimeField()
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='order')
