@@ -2,58 +2,99 @@
 {% load static %}
 
 {% block content %}
-<h1>Menu</h1>
-<!--Begin col-->
-<div class="column">
-    
-    <h2>Starters</h2>
-    {% for item in menu %}
-        {% if item.category.pk == 1 %}
-        <p>
-            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
-            <span class="menu-price">
-                ${{item.price}}
-            </span>
-        </p>
-        {% endif %}
-    {% endfor %}
-    
-    <h2>Mains</h2>
-    {% for item in menu %}
-        {% if item.category.pk == 2 %}
-        <p>
-            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
-            <span class="menu-price">
-                ${{item.price}}
-            </span>
-        </p>
-        {% endif %}
-    {% endfor %}
-    
-    <h2>Desserts</h2>
-    {% for item in menu %}
-        {% if item.category.pk == 3 %}
-        <p>
-            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
-            <span class="menu-price">
-                ${{item.price}}
-            </span>
-        </p>
-        {% endif %}
-    {% endfor %}
-    
-    <h2>Drinks</h2>
-    {% for item in menu %}
-        {% if item.category.pk == 4 %}
-        <p>
-            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
-            <span class="menu-price">
-                ${{item.price}}
-            </span>
-        </p>
-        {% endif %}
-    {% endfor %}
+<section>
+  <article>
+    <h1>Menu</h1>
+    <!--Begin row-->
+    <div class="row">
+        <!--Begin col-->
+        <div class="column">
+            
+            <h2>Starters</h2>
+            {% for item in menu %}
+                {% if item.category.pk == 1 %}
+                <p>
+                    <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+                    <span class="menu-details">
+                        {{item.ingredients}}
+                        <br>
+                        ${{item.price}}
+                    </span>
+                </p>
+                {% endif %}
+            {% endfor %}
+            
+            <h2>Mains</h2>
+            {% for item in menu %}
+                {% if item.category.pk == 2 %}
+                <p>
+                    <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+                    <span class="menu-details">
+                        {{item.ingredients}}
+                        <br>
+                        ${{item.price}}
+                    </span>
+                </p>
+                {% endif %}
+            {% endfor %}
+            
+            <h2>Desserts</h2>
+            {% for item in menu %}
+                {% if item.category.pk == 3 %}
+                <p>
+                    <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+                    <span class="menu-details">
+                        {{item.ingredients}}
+                        <br>
+                        ${{item.price}}
+                    </span>
+                </p>
+                {% endif %}
+            {% endfor %}
+            
+            <h2>Drinks</h2>
+            {% for item in menu %}
+                {% if item.category.pk == 4 %}
+                <p>
+                    <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+                    <span class="menu-details">
+                        {{item.ingredients}}
+                        <br>
+                        ${{item.price}}
+                    </span>
+                </p>
+                {% endif %}
+            {% endfor %}
 
-</div>
-<!--End col-->
+        </div>
+        <!--End col-->
+
+        <!--Begin col-->
+        <div class="column">
+           <figure class="figure">
+            <img
+              src="{% static 'img/Grilled fish B.jpg' %}"
+              alt="Charcoal Grilled Fish"
+            />
+            <figcaption class="figure-caption">
+              Charcoal Grilled Fish.
+            </figcaption>
+          </figure>
+          <br>
+          <figure class="figure">
+            <img
+              src="{% static 'img/lemon dessert B.jpg' %}"
+              alt="Light Lemon Dessert"
+            />
+            <figcaption class="figure-caption">
+              Light Lemon Dessert.
+            </figcaption>
+          </figure>
+        </div>
+        <!--End col-->
+
+    </div>
+    <!--End row-->
+  </article>
+</section>
 {% endblock %}
