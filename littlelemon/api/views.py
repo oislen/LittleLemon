@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import Group, User
-from restaurant.models import Category, MenuItem, Order, Cart, Booking
-from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer, CartSerializer, BookingSerializer
+from restaurant.models import Category, MenuItem, Order, Cart, Booking, OrderItem
+from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer, CartSerializer, BookingSerializer, OrderItemSerializer
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
@@ -24,7 +24,11 @@ class CustomerOrderViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        if User.objects.get(username=self.request.user).is_superuser:
+            response = Order.objects.all()
+        else:
+            response = Order.objects.filter(user=self.request.user)
+        return response
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
