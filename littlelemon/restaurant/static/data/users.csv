@@ -1,0 +1,13 @@
+﻿username,password,email,first_name,last_name,is_super_user
+"user1","Pass123!","user1@email.com","user1","user1",FALSE
+"user2","Pass123!","user2@email.com","user2","user2",FALSE
+"user3","Pass123!","user3@email.com","user3","user3",FALSE
+"user4","Pass123!","user4@email.com","user4","user4",FALSE
+"adminuser1","Pass123!","adminuser1@email.com","adminuser1","adminuser1",TRUE
+"adminuser2","Pass123!","adminuser2@email.com","adminuser2","adminuser2",TRUE
+"adminuser3","Pass123!","adminuser3@email.com","adminuser3","adminuser3",TRUE
+"adminuser4","Pass123!","adminuser4@email.com","adminuser4","adminuser4",TRUE
+"deliveryuser1","Pass123!","deliveryuser1@email.com","deliveryuser1","deliveryuser1",FALSE
+"deliveryuser2","Pass123!","deliveryuser2@email.com","deliveryuser2","deliveryuser2",FALSE
+"deliveryuser3","Pass123!","deliveryuser3@email.com","deliveryuser3","deliveryuser3",FALSE
+"deliveryuser4","Pass123!","deliveryuser4@email.com","deliveryuser4","deliveryuser4",FALSE
