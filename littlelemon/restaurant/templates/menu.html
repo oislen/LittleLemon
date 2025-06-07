@@ -5,14 +5,55 @@
 <h1>Menu</h1>
 <!--Begin col-->
 <div class="column">
+    
+    <h2>Starters</h2>
     {% for item in menu %}
-    <p>
-        <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
-        <span class="menu-price">
-            ${{item.price}}
-        </span>
-    </p>
+        {% if item.category.pk == 1 %}
+        <p>
+            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+            <span class="menu-price">
+                ${{item.price}}
+            </span>
+        </p>
+        {% endif %}
     {% endfor %}
+    
+    <h2>Mains</h2>
+    {% for item in menu %}
+        {% if item.category.pk == 2 %}
+        <p>
+            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+            <span class="menu-price">
+                ${{item.price}}
+            </span>
+        </p>
+        {% endif %}
+    {% endfor %}
+    
+    <h2>Desserts</h2>
+    {% for item in menu %}
+        {% if item.category.pk == 3 %}
+        <p>
+            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+            <span class="menu-price">
+                ${{item.price}}
+            </span>
+        </p>
+        {% endif %}
+    {% endfor %}
+    
+    <h2>Drinks</h2>
+    {% for item in menu %}
+        {% if item.category.pk == 4 %}
+        <p>
+            <a href="{% url 'menu_item' pk=item.pk %}"> {{ item.name }} </a>
+            <span class="menu-price">
+                ${{item.price}}
+            </span>
+        </p>
+        {% endif %}
+    {% endfor %}
+
 </div>
 <!--End col-->
 {% endblock %}
