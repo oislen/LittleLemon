@@ -32,6 +32,7 @@ def run():
             name=row["name"],
             price=float(row["price"]),
             quantity=int(row["quantity"]),
+            ingredients=row["ingredients"],
             description=row["description"],
             featured=row["featured"],
             category=Category.objects.get(pk=row["category"]),
