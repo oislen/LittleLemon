@@ -5,21 +5,22 @@ class Category(models.Model):
    title = models.CharField(max_length=255, db_index=True)
 
 class MenuItem(models.Model):
-   name = models.CharField(max_length=255, db_index=True)
-   price = models.DecimalField(max_digits=6, decimal_places=2)
-   quantity = models.SmallIntegerField(default=None, null=True)
-   description = models.TextField(max_length=1000, default=None, null=True)
-   featured = models.BooleanField(default=False)
-   category = models.ForeignKey(Category, on_delete=models.PROTECT, default=None)
-   date_added = models.DateField()
    reference = models.CharField(max_length=32, db_index=True)
+   name = models.CharField(max_length=255, db_index=True)
+   category = models.ForeignKey(Category, on_delete=models.PROTECT, default=None)
+   description = models.TextField(max_length=1020, default=None, null=True)
+   ingredients = models.CharField(max_length=510, default=None, null=True)
+   price = models.DecimalField(max_digits=6, decimal_places=2, default=None, null=True)
+   quantity = models.SmallIntegerField(default=None, null=True)
+   date_added = models.DateField()
+   featured = models.BooleanField(default=False)
 
 class Booking(models.Model):
-   full_name = models.CharField(max_length=200)
+   full_name = models.CharField(max_length=255)
    mobile_number = models.CharField(max_length=32)
    guest_number = models.PositiveIntegerField()
    date_time = models.DateTimeField()
-   comment = models.CharField(max_length=1000, default=None, null=True, blank=True)
+   comment = models.CharField(max_length=1020, default=None, null=True, blank=True)
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
