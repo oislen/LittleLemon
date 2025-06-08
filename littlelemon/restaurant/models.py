@@ -13,15 +13,15 @@ class MenuItem(models.Model):
     description = models.TextField(max_length=1020, default=None, null=True)
     ingredients = models.CharField(max_length=510, default=None, null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=None, null=True)
-    quantity = models.SmallIntegerField(default=None, null=True)
+    quantity = models.PositiveSmallIntegerField(default=None, null=True)
     date_added = models.DateField()
-    featured = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False, null=True)
 
 class Booking(models.Model):
     booking_id = models.AutoField(primary_key=True)
     full_name = models.CharField(max_length=255)
     mobile_number = models.CharField(max_length=32)
-    guest_number = models.PositiveIntegerField()
+    guest_number = models.PositiveSmallIntegerField()
     date_time = models.DateTimeField()
     comment = models.CharField(max_length=1020, default=None, null=True, blank=True)
 
@@ -29,7 +29,7 @@ class Cart(models.Model):
     cart_id = models.AutoField(primary_key=True)
     customer_username = models.ForeignKey(User, on_delete=models.PROTECT)
     menuitem_id = models.ForeignKey(MenuItem, on_delete=models.PROTECT)
-    quantity = models.SmallIntegerField(default=0)
+    quantity = models.PositiveSmallIntegerField(default=0)
     unit_price = models.DecimalField(max_digits=6, decimal_places=2)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
@@ -45,5 +45,5 @@ class OrderItem(models.Model):
     orderitem_id = models.AutoField(primary_key=True)
     order_id = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='order')
     menuitem_id = models.ForeignKey(MenuItem, on_delete=models.PROTECT)
-    quantity = models.SmallIntegerField()
+    quantity = models.PositiveSmallIntegerField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
