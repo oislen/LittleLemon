@@ -1,4 +1,4 @@
-﻿order,menu_item,quantity,price
+﻿order_id,menuitem_id,quantity,price
 1,4,1,12
 1,2,1,25
 2,1,2,30
