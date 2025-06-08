@@ -3,27 +3,27 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=255, db_index=True)
+    title = models.CharField(max_length=32, db_index=True)
 
 class MenuItem(models.Model):
     menuitem_id = models.AutoField(primary_key=True)
     reference = models.CharField(max_length=32, db_index=True)
-    name = models.CharField(max_length=255, db_index=True)
+    name = models.CharField(max_length=64, db_index=True)
     category_id = models.ForeignKey(Category, on_delete=models.PROTECT, default=None)
-    description = models.TextField(max_length=1020, default=None, null=True)
-    ingredients = models.CharField(max_length=510, default=None, null=True)
+    description = models.CharField(max_length=640, default=None, null=True)
+    ingredients = models.CharField(max_length=320, default=None, null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=None, null=True)
     quantity = models.PositiveSmallIntegerField(default=None, null=True)
-    date_added = models.DateField()
+    created_date_time = models.DateTimeField()
     featured = models.BooleanField(default=False, null=True)
 
 class Booking(models.Model):
     booking_id = models.AutoField(primary_key=True)
-    full_name = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=64)
     mobile_number = models.CharField(max_length=32)
     guest_number = models.PositiveSmallIntegerField()
     date_time = models.DateTimeField()
-    comment = models.CharField(max_length=1020, default=None, null=True, blank=True)
+    comment = models.CharField(max_length=320, default=None, null=True, blank=True)
 
 class Cart(models.Model):
     cart_id = models.AutoField(primary_key=True)
