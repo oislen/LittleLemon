@@ -35,7 +35,7 @@ def run():
             ingredients=row["ingredients"],
             description=row["description"],
             featured=row["featured"],
-            category=Category.objects.get(pk=row["category"]),
+            category_id=Category.objects.get(pk=row["category"]),
             date_added=row["date_added"],
             reference=row["reference"]
         )
@@ -66,7 +66,8 @@ def run():
                 password=row["password"],
                 email=row["email"],
                 first_name=row["first_name"],
-                last_name=row["last_name"]
+                last_name=row["last_name"],
+                is_staff=row['is_staff_user']
             )
         if (not row["is_super_user"]):
             # create the instance
@@ -75,7 +76,8 @@ def run():
                 password=row["password"],
                 email=row["email"],
                 first_name=row["first_name"],
-                last_name=row["last_name"]
+                last_name=row["last_name"],
+                is_staff=row['is_staff_user']
             )
 
     logging.info("Loading Orders ...")
@@ -85,8 +87,8 @@ def run():
     for index, row in order_data.iterrows():
         # create the instance
         order = Order.objects.get_or_create(
-            user=User.objects.get(username=row["user"]),
-            delivery_crew=User.objects.get(username=row["delivery_crew"]),
+            customer_username=User.objects.get(username=row["customer_username"]),
+            delivery_username=User.objects.get(username=row["delivery_username"]),
             status=row["status"],
             total=float(row["total"]),
             date_time=row["date_time"]
@@ -99,8 +101,8 @@ def run():
     for index, row in order_items_data.iterrows():
         # create the instance
         order = OrderItem.objects.get_or_create(
-            order=Order.objects.get(pk=row["order"]),
-            menu_item=MenuItem.objects.get(pk=row["menu_item"]),
+            order_id=Order.objects.get(pk=row["order_id"]),
+            menuitem_id=MenuItem.objects.get(pk=row["menuitem_id"]),
             quantity=int(row["quantity"]),
             price=float(row["price"])
         )
