@@ -10,6 +10,12 @@ The web app also includes a REST API for interacting with backend data model. Th
 
 ![Rest API](report/API_HomePage.png)
 
+## Data Model
+
+The underlying data model present in the Little Lemon Restaurant Web App is displayed below. 
+
+![Entity Relationship Diagram](doc/data_model.jpg)
+
 ## Running the Application (Windows)
 
 ### Anaconda
