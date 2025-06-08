@@ -35,8 +35,8 @@ def run():
             ingredients=row["ingredients"],
             description=row["description"],
             featured=row["featured"],
-            category_id=Category.objects.get(pk=row["category"]),
-            date_added=row["date_added"],
+            category_id=Category.objects.get(pk=row["category_id"]),
+            created_date_time=row["created_date_time"],
             reference=row["reference"]
         )
     
