@@ -16,6 +16,10 @@ The underlying data model present in the Little Lemon Restaurant Web App is disp
 
 ![Entity Relationship Diagram](doc/data_model.jpg)
 
+For a more detailed account of each column in the dataset see the data dictionary:
+
+* https://github.com/oislen/LittleLemoon/blob/main/doc/data_dictionary.xlsx
+
 ## Running the Application (Windows)
 
 ### Anaconda
