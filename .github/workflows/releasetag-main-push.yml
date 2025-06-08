@@ -1,4 +1,4 @@
-name: DockerHub Main Push
+name: Release Tag Main Push
 
 on:
     workflow_run:
