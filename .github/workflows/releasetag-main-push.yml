@@ -6,12 +6,17 @@ on:
       types:
         - completed
 jobs:
-  deploy:
+  create-tag:
     runs-on: ubuntu-latest
     steps:
-      - name: Tag Repo
-        uses: richardsimko/update-tag@v1
+      - uses: actions/checkout@v4
         with:
-          tag_name: v0.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          fetch-depth: 0
+      - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: "v0.0.0"
+          tag_exists_error: false
+          message: ""
+          force_push_tag: true
+
