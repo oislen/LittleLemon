@@ -56,7 +56,7 @@ class MenuItemMixin:
                 quantity = self.items[idx].get("quantity", None),
                 description = self.items[idx].get("description", None),
                 featured = self.items[idx].get("featured", False),
-                category = category,
+                category_id = category,
                 date_added = self.items[idx].get("date_added", None),
                 reference = self.items[idx].get("reference", None)
             )
@@ -76,7 +76,7 @@ class SingleMenuItemMixin:
             description = self.item.get("description", None),
             quantity = self.item.get("quantity", None),
             featured = self.item.get("featured", False),
-            category = category,
+            category_id = category,
             date_added = self.item.get("date_added", None),
             reference = self.item.get("reference", None),
         )
