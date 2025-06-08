@@ -38,7 +38,6 @@ Initialise the Little Lemon Web app sqlite database with preconfigured data and 
 python manage.py makemigrations restaurant
 python manage.py migrate
 python manage.py runscript restaurant.import_data
-python manage.py shell -v 3 -c "from django.contrib.auth.models import User; User.objects.create_superuser('superuser1', 'superuser1@littlelemon.com', 'superuser1')"
 ```
 
 Run the django tests and start the Little Lemon Web app using the following commands and the local conda environment:
