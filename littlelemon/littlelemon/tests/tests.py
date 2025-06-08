@@ -84,7 +84,7 @@ class MenuItemViewTest(SetUpMixin, MenuItemMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_create(self):
-        data = {"name":"Ice Latte", "price":2.99, "quantity":5, "description":"Finely grounded and on ice.", "featured":False, "category":1, "date_added":"2024-12-07", "reference":"ICELTE20241207"}
+        data = {"name":"Ice Latte", "price":2.99, "quantity":5, "description":"Finely grounded and on ice.", "featured":False, "category_id":1, "date_added":"2024-12-07", "reference":"ICELTE20241207"}
         response = self.client.post(f"/api/menu-items/", data=data, content_type="application/json")
         serializer = MenuItemSerializer(MenuItem.objects.get(name="Ice Latte"))
         self.assertEqual(response.status_code, 201)
@@ -111,7 +111,7 @@ class SingleMenuItemViewTest(SetUpMixin, SingleMenuItemMixin, TestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_update(self):
-        data = json.dumps({"name": "Apple Juice", "price": 3.85, "quantity": 7, "description": "Freshly squeezed", "category":1, "date_added":"2024-12-07", "reference":"APLJCE20241207"})
+        data = json.dumps({"name": "Apple Juice", "price": 3.85, "quantity": 7, "description": "Freshly squeezed", "category_id":1, "date_added":"2024-12-07", "reference":"APLJCE20241207"})
         response = self.client.put(f"/api/menu-items/{self.menu_item.pk}/", data = data, content_type = "application/json")
         serializer = MenuItemSerializer(MenuItem.objects.get(pk=self.menu_item.pk))
         self.assertEqual(response.status_code, 200)
