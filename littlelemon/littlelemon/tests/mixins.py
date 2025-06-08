@@ -9,9 +9,9 @@ BOOKINGS = {
 }
 
 MENU_ITEMS = {
-    1: {"name": "Apple Pie", "price": 13.78, "quantity": randint(0, 11), "description":"Baked apple pie with cream", "category":"Dessert", "date_added":"2023-03-04", "reference":"APLPIE20230304"},
-    2: {"name": "Vanilla Latte", "price": 3.99, "quantity": randint(0, 11), "description":"Barista latte with vanilla essence" , "category":"Drinks", "date_added":"2023-03-04", "reference":"VANLTE20230304"},
-    3: {"name": "Ice-cream", "price": 5.00, "quantity": randint(0, 11), "description":"Chocolate, strawberry ot vanilla", "category":"Dessert", "date_added":"2023-03-04", "reference":"ICECRM20230304"},
+    1: {"name": "Apple Pie", "price": 13.78, "quantity": randint(0, 11), "description":"Baked apple pie with cream", "category":"Dessert", "created_date_time":"2023-03-04 09:00:00", "reference":"APLPIE20230304"},
+    2: {"name": "Vanilla Latte", "price": 3.99, "quantity": randint(0, 11), "description":"Barista latte with vanilla essence" , "category":"Drinks", "created_date_time":"2023-03-04 12:00:00", "reference":"VANLTE20230304"},
+    3: {"name": "Ice-cream", "price": 5.00, "quantity": randint(0, 11), "description":"Chocolate, strawberry ot vanilla", "category":"Dessert", "created_date_time":"2023-03-04 14:00:00", "reference":"ICECRM20230304"},
 }
 
 class BookingMixin:
@@ -57,7 +57,7 @@ class MenuItemMixin:
                 description = self.items[idx].get("description", None),
                 featured = self.items[idx].get("featured", False),
                 category_id = category,
-                date_added = self.items[idx].get("date_added", None),
+                created_date_time = self.items[idx].get("created_date_time", None),
                 reference = self.items[idx].get("reference", None)
             )
             item.save()
@@ -77,7 +77,7 @@ class SingleMenuItemMixin:
             quantity = self.item.get("quantity", None),
             featured = self.item.get("featured", False),
             category_id = category,
-            date_added = self.item.get("date_added", None),
+            created_date_time = self.item.get("created_date_time", None),
             reference = self.item.get("reference", None),
         )
         item.save()
