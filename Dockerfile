@@ -12,6 +12,7 @@ RUN apt-get update
 RUN apt-get install -y apt-utils vim curl wget unzip tree htop
 
 # set up home environment
+RUN adduser ${user}
 RUN mkdir -p /home/${user} && chown -R ${user}: /home/${user}
 
 # copy little lemon repo
