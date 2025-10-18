@@ -176,3 +176,4 @@ cython_debug/
 # custom paths
 /littlelemon/restaurant/migrations/
 /littlelemon/api/migrations
+.creds
