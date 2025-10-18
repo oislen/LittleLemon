@@ -55,18 +55,18 @@ Once the web app is running, navigate to localhost:8000 in your preferred browse
 
 The latest version of the Little Lemon Web App can be found as a [docker](https://www.docker.com/) image on dockerhub here:
 
-* https://hub.docker.com/repository/docker/oislen/littlelemon/general
+* https://hub.docker.com/repository/docker/oislen/littlelemondjango/general
 
 The image can be pulled from dockerhub using the following command:
 
 ```
-docker pull oislen/littlelemon:latest
+docker pull oislen/littlelemondjango:latest
 ```
 
 The Little Lemon Web App can then be started using the following command and the docker image:
 
 ```
-docker run --name llr --memory 6GB --shm-size=512m -p 8000:8000 --rm oislen/littlelemon:latest
+docker run --name llr --memory 6GB --shm-size=512m -p 8000:8000 --rm oislen/littlelemondjango:latest
 ```
 
 Once the web app is running, navigate to localhost:8000 in your preferred browser
