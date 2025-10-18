@@ -30,6 +30,7 @@ jobs:
         exit-code: '1'
 
   python-unittests:
+    needs: release-tag
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
