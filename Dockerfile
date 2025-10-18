@@ -2,7 +2,7 @@
 FROM python:3.12
 
 # set environment variables
-ENV user=ubuntu
+ENV user=user
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -15,10 +15,10 @@ RUN apt-get install -y apt-utils vim curl wget unzip tree htop
 RUN mkdir -p /home/${user} && chown -R ${user}: /home/${user}
 
 # copy little lemon repo
-COPY . /home/ubuntu/LittleLemonDjango
+COPY . /home/${user}/LittleLemonDjango
 
 # install required python packages
-RUN python -m pip install -v -r /home/ubuntu/LittleLemon/requirements.txt
+RUN python -m pip install -v -r /home/${user}/LittleLemon/requirements.txt
 
 # set working directory for django app
 WORKDIR /home/${user}/LittleLemonDjango/littlelemon
