@@ -1,6 +1,6 @@
 :: set docker settings
 SET DOCKER_USER=oislen
-SET DOCKER_REPO=littlelemon
+SET DOCKER_REPO=littlelemondjango
 SET DOCKER_TAG=latest
 SET DOCKER_IMAGE=%DOCKER_USER%/%DOCKER_REPO%:%DOCKER_TAG%
 SET DOCKER_CONTAINER_NAME=llr
