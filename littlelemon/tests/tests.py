@@ -6,7 +6,7 @@ import json
 from api.serializers import MenuItemSerializer, BookingSerializer
 from restaurant.models import MenuItem, Booking
 from littlelemon.settings import DATETIME_FORMAT
-from littlelemon.tests.mixins import BookingMixin, SingleBookingMixin, MenuItemMixin, SingleMenuItemMixin
+from tests.mixins import BookingMixin, SingleBookingMixin, MenuItemMixin, SingleMenuItemMixin
 
 class SetUpMixin:
 
