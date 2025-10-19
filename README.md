@@ -67,7 +67,7 @@ The Little Lemon Web App can then be started using the following command and the
 
 ```
 docker network create littlelemon
-docker run --name llr --net littlelemon --publish 8000:8000 --memory 6GB --shm-size=512m --rm oislen/littlelemondjango:latest
+docker run --name lld --net littlelemon --publish 8000:8000 --memory 6GB --shm-size=512m --rm oislen/littlelemondjango:latest
 ```
 
 Once the web app is running, navigate to localhost:8000 in your preferred browser
