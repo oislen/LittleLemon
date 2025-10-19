@@ -14,8 +14,8 @@ call docker build --no-cache -t %DOCKER_IMAGE% .
 
 :: run docker container
 SET UBUNTU_DIR=/home/ubuntu
-call docker run --name %DOCKER_CONTAINER_NAME% --memory 6GB --shm-size=512m -p 8000:8000 --rm %DOCKER_IMAGE%
-:: call docker run -it --entrypoint sh --name %DOCKER_CONTAINER_NAME% --memory 6GB --shm-size=512m -p 8000:8000 --rm %DOCKER_IMAGE%
+call docker run --name %DOCKER_CONTAINER_NAME% --net littlelemon --memory 6GB --shm-size=512m -p 8000:8000 --rm %DOCKER_IMAGE%
+:: call docker run -it --entrypoint sh --name %DOCKER_CONTAINER_NAME% --net littlelemon --memory 6GB --shm-size=512m -p 8000:8000 --rm %DOCKER_IMAGE%
 
 :: useful docker commands
 :: docker images
