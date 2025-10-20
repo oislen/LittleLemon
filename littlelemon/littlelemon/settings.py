@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "host.docker.internal"]
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,12 +45,13 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     "djoser",
     "django_extensions",
-    
+
     "restaurant",
     'api',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -180,3 +182,21 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+# Set this to True to allow all origins during development.
+# It is generally safer to use CORS_ALLOWED_ORIGINS in production.
+CORS_ALLOW_ALL_ORIGINS = False
+
+# Specify the exact origins that are allowed to make cross-site requests.
+# Replace '3000' with your actual React development server port (e.g., 5173 for Vite).
+# You are fetching from 'http://localhost/' so you may need to allow:
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",   # Standard React port
+    "http://127.0.0.1:3000",   # Alternative localhost IP/port
+    "http://localhost:5173",   # Common Vite/modern dev server port
+    "http://localhost",        # Your frontend's host (no port in your current URL)
+]
+
+# If you were making requests from your frontend that included cookies or authorization 
+# headers (credentials), you would also set this to True:
+# CORS_ALLOW_CREDENTIALS = True
