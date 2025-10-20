@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "host.docker.internal"]
 INSTALLED_APPS = [
     "corsheaders",
     "django.contrib.admin",
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
